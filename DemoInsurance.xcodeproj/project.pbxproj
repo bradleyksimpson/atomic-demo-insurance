@@ -1,0 +1,497 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		11111111111111111111111111111111 /* DemoInsuranceApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22222222222222222222222222222222 /* DemoInsuranceApp.swift */; };
+		55555555555555555555555555555555 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66666666666666666666666666666666 /* Assets.xcassets */; };
+		77777777777777777777777777777777 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88888888888888888888888888888888 /* Preview Assets.xcassets */; };
+		CAB42CE82E9F637C0010429F /* AtomicSDK in Frameworks */ = {isa = PBXBuildFile; productRef = CAB42CE72E9F637C0010429F /* AtomicSDK */; };
+		CAB42CEA2E9F637C0010429F /* AtomicSwiftUISDK in Frameworks */ = {isa = PBXBuildFile; productRef = CAB42CE92E9F637C0010429F /* AtomicSwiftUISDK */; };
+		CAD98DEF2EA060E7003592FA /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98DED2EA060E7003592FA /* MockData.swift */; };
+		CAD98DF02EA060E7003592FA /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98DEE2EA060E7003592FA /* Theme.swift */; };
+		CAD98E072EA08973003592FA /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98DFA2EA08973003592FA /* Models.swift */; };
+		CAD98E082EA08973003592FA /* ChatbotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98DFD2EA08973003592FA /* ChatbotView.swift */; };
+		CAD98E092EA08973003592FA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98E032EA08973003592FA /* ProfileView.swift */; };
+		CAD98E0A2EA08973003592FA /* MainContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98E002EA08973003592FA /* MainContentView.swift */; };
+		CAD98E0B2EA08973003592FA /* SmartHomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98E042EA08973003592FA /* SmartHomeView.swift */; };
+		CAD98E0C2EA08973003592FA /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98E012EA08973003592FA /* OnboardingView.swift */; };
+		CAD98E0D2EA08973003592FA /* AtomicConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98DF62EA08973003592FA /* AtomicConfiguration.swift */; };
+		CAD98E0E2EA08973003592FA /* AtomicSDKPlaceholders.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98DF72EA08973003592FA /* AtomicSDKPlaceholders.swift */; };
+		CAD98E0F2EA08973003592FA /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98DFF2EA08973003592FA /* HomeView.swift */; };
+		CAD98E102EA08973003592FA /* DemoInsuranceAtomicSessionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98DF82EA08973003592FA /* DemoInsuranceAtomicSessionDelegate.swift */; };
+		CAD98E112EA08973003592FA /* PoliciesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98E022EA08973003592FA /* PoliciesView.swift */; };
+		CAD98E122EA08973003592FA /* TelematicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98E052EA08973003592FA /* TelematicsView.swift */; };
+		CAD98E132EA08973003592FA /* ClaimsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAD98DFE2EA08973003592FA /* ClaimsView.swift */; };
+		CAD98E142EA08973003592FA /* Build DemoInsurance_2025-10-16T14-54-12.txt in Resources */ = {isa = PBXBuildFile; fileRef = CAD98DFC2EA08973003592FA /* Build DemoInsurance_2025-10-16T14-54-12.txt */; };
+		CAD98E152EA08973003592FA /* atomic_demo_public_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = CAD98DF52EA08973003592FA /* atomic_demo_public_key.pem */; };
+		CAD98E162EA08973003592FA /* atomic_demo_private_key.pem in Resources */ = {isa = PBXBuildFile; fileRef = CAD98DF42EA08973003592FA /* atomic_demo_private_key.pem */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		22222222222222222222222222222222 /* DemoInsuranceApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoInsuranceApp.swift; sourceTree = "<group>"; };
+		66666666666666666666666666666666 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		88888888888888888888888888888888 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA /* DemoInsurance.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoInsurance.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAB25C092E9DEEA200A41259 /* atomic_demo_private_key.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = atomic_demo_private_key.pem; sourceTree = "<group>"; };
+		CAD98DED2EA060E7003592FA /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MockData.swift; path = DemoInsurance/Resources/MockData.swift; sourceTree = "<group>"; };
+		CAD98DEE2EA060E7003592FA /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Theme.swift; path = DemoInsurance/Resources/Theme.swift; sourceTree = "<group>"; };
+		CAD98DF42EA08973003592FA /* atomic_demo_private_key.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = atomic_demo_private_key.pem; sourceTree = "<group>"; };
+		CAD98DF52EA08973003592FA /* atomic_demo_public_key.pem */ = {isa = PBXFileReference; lastKnownFileType = text; path = atomic_demo_public_key.pem; sourceTree = "<group>"; };
+		CAD98DF62EA08973003592FA /* AtomicConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicConfiguration.swift; sourceTree = "<group>"; };
+		CAD98DF72EA08973003592FA /* AtomicSDKPlaceholders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtomicSDKPlaceholders.swift; sourceTree = "<group>"; };
+		CAD98DF82EA08973003592FA /* DemoInsuranceAtomicSessionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoInsuranceAtomicSessionDelegate.swift; sourceTree = "<group>"; };
+		CAD98DFA2EA08973003592FA /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		CAD98DFC2EA08973003592FA /* Build DemoInsurance_2025-10-16T14-54-12.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Build DemoInsurance_2025-10-16T14-54-12.txt"; sourceTree = "<group>"; };
+		CAD98DFD2EA08973003592FA /* ChatbotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatbotView.swift; sourceTree = "<group>"; };
+		CAD98DFE2EA08973003592FA /* ClaimsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimsView.swift; sourceTree = "<group>"; };
+		CAD98DFF2EA08973003592FA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		CAD98E002EA08973003592FA /* MainContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainContentView.swift; sourceTree = "<group>"; };
+		CAD98E012EA08973003592FA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		CAD98E022EA08973003592FA /* PoliciesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoliciesView.swift; sourceTree = "<group>"; };
+		CAD98E032EA08973003592FA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		CAD98E042EA08973003592FA /* SmartHomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartHomeView.swift; sourceTree = "<group>"; };
+		CAD98E052EA08973003592FA /* TelematicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelematicsView.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAB42CEA2E9F637C0010429F /* AtomicSwiftUISDK in Frameworks */,
+				CAB42CE82E9F637C0010429F /* AtomicSDK in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CAB25C322E9F589200A41259 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CAD98DF92EA08973003592FA /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				CAD98DF42EA08973003592FA /* atomic_demo_private_key.pem */,
+				CAD98DF52EA08973003592FA /* atomic_demo_public_key.pem */,
+				CAD98DF62EA08973003592FA /* AtomicConfiguration.swift */,
+				CAD98DF72EA08973003592FA /* AtomicSDKPlaceholders.swift */,
+				CAD98DF82EA08973003592FA /* DemoInsuranceAtomicSessionDelegate.swift */,
+			);
+			name = Configuration;
+			path = DemoInsurance/Configuration;
+			sourceTree = "<group>";
+		};
+		CAD98DFB2EA08973003592FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CAD98DFA2EA08973003592FA /* Models.swift */,
+			);
+			name = Models;
+			path = DemoInsurance/Models;
+			sourceTree = "<group>";
+		};
+		CAD98E062EA08973003592FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CAD98DFC2EA08973003592FA /* Build DemoInsurance_2025-10-16T14-54-12.txt */,
+				CAD98DFD2EA08973003592FA /* ChatbotView.swift */,
+				CAD98DFE2EA08973003592FA /* ClaimsView.swift */,
+				CAD98DFF2EA08973003592FA /* HomeView.swift */,
+				CAD98E002EA08973003592FA /* MainContentView.swift */,
+				CAD98E012EA08973003592FA /* OnboardingView.swift */,
+				CAD98E022EA08973003592FA /* PoliciesView.swift */,
+				CAD98E032EA08973003592FA /* ProfileView.swift */,
+				CAD98E042EA08973003592FA /* SmartHomeView.swift */,
+				CAD98E052EA08973003592FA /* TelematicsView.swift */,
+			);
+			name = Views;
+			path = DemoInsurance/Views;
+			sourceTree = "<group>";
+		};
+		CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC = {
+			isa = PBXGroup;
+			children = (
+				CAD98DF92EA08973003592FA /* Configuration */,
+				CAD98DFB2EA08973003592FA /* Models */,
+				CAD98E062EA08973003592FA /* Views */,
+				CAD98DED2EA060E7003592FA /* MockData.swift */,
+				CAD98DEE2EA060E7003592FA /* Theme.swift */,
+				DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD /* DemoInsurance */,
+				CAB25C322E9F589200A41259 /* Frameworks */,
+				EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD /* DemoInsurance */ = {
+			isa = PBXGroup;
+			children = (
+				CAB25C092E9DEEA200A41259 /* atomic_demo_private_key.pem */,
+				88888888888888888888888888888888 /* Preview Assets.xcassets */,
+				22222222222222222222222222222222 /* DemoInsuranceApp.swift */,
+				66666666666666666666666666666666 /* Assets.xcassets */,
+				FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF /* Preview Content */,
+			);
+			path = DemoInsurance;
+			sourceTree = "<group>";
+		};
+		EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA /* DemoInsurance.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1111111111111111111111111111111A /* DemoInsurance */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1111111111111111111111111111111B /* Build configuration list for PBXNativeTarget "DemoInsurance" */;
+			buildPhases = (
+				1111111111111111111111111111111C /* Sources */,
+				BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB /* Frameworks */,
+				1111111111111111111111111111111D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DemoInsurance;
+			productName = DemoInsurance;
+			productReference = AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA /* DemoInsurance.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1111111111111111111111111111111E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					1111111111111111111111111111111A = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 1111111111111111111111111111111F /* Build configuration list for PBXProject "DemoInsurance" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC;
+			packageReferences = (
+				CAB42CE62E9F637C0010429F /* XCRemoteSwiftPackageReference "action-cards-swiftui-sdk-releases" */,
+			);
+			productRefGroup = EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1111111111111111111111111111111A /* DemoInsurance */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1111111111111111111111111111111D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAD98E142EA08973003592FA /* Build DemoInsurance_2025-10-16T14-54-12.txt in Resources */,
+				CAD98E152EA08973003592FA /* atomic_demo_public_key.pem in Resources */,
+				CAD98E162EA08973003592FA /* atomic_demo_private_key.pem in Resources */,
+				77777777777777777777777777777777 /* Preview Assets.xcassets in Resources */,
+				55555555555555555555555555555555 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1111111111111111111111111111111C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				11111111111111111111111111111111 /* DemoInsuranceApp.swift in Sources */,
+				CAD98E072EA08973003592FA /* Models.swift in Sources */,
+				CAD98E082EA08973003592FA /* ChatbotView.swift in Sources */,
+				CAD98E092EA08973003592FA /* ProfileView.swift in Sources */,
+				CAD98E0A2EA08973003592FA /* MainContentView.swift in Sources */,
+				CAD98E0B2EA08973003592FA /* SmartHomeView.swift in Sources */,
+				CAD98E0C2EA08973003592FA /* OnboardingView.swift in Sources */,
+				CAD98E0D2EA08973003592FA /* AtomicConfiguration.swift in Sources */,
+				CAD98E0E2EA08973003592FA /* AtomicSDKPlaceholders.swift in Sources */,
+				CAD98E0F2EA08973003592FA /* HomeView.swift in Sources */,
+				CAD98E102EA08973003592FA /* DemoInsuranceAtomicSessionDelegate.swift in Sources */,
+				CAD98E112EA08973003592FA /* PoliciesView.swift in Sources */,
+				CAD98E122EA08973003592FA /* TelematicsView.swift in Sources */,
+				CAD98E132EA08973003592FA /* ClaimsView.swift in Sources */,
+				CAD98DEF2EA060E7003592FA /* MockData.swift in Sources */,
+				CAD98DF02EA060E7003592FA /* Theme.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		2222222222222222222222222222222A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2222222222222222222222222222222B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2222222222222222222222222222222C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DemoInsurance/Preview Content\"";
+				DEVELOPMENT_TEAM = DC9UA96THG;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Demo Insurance";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses camera to take photos for claims";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses location for telematics and driving insights";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses motion sensors to track driving behavior for insurance discounts";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app accesses photos for claims processing";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.demo.insurance.simulator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2222222222222222222222222222222D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"DemoInsurance/Preview Content\"";
+				DEVELOPMENT_TEAM = DC9UA96THG;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Demo Insurance";
+				INFOPLIST_KEY_NSCameraUsageDescription = "This app uses camera to take photos for claims";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app uses location for telematics and driving insights";
+				INFOPLIST_KEY_NSMotionUsageDescription = "This app uses motion sensors to track driving behavior for insurance discounts";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "This app accesses photos for claims processing";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.demo.insurance.simulator;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1111111111111111111111111111111B /* Build configuration list for PBXNativeTarget "DemoInsurance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2222222222222222222222222222222C /* Debug */,
+				2222222222222222222222222222222D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1111111111111111111111111111111F /* Build configuration list for PBXProject "DemoInsurance" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2222222222222222222222222222222A /* Debug */,
+				2222222222222222222222222222222B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CAB42CE62E9F637C0010429F /* XCRemoteSwiftPackageReference "action-cards-swiftui-sdk-releases" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/atomic-app/action-cards-swiftui-sdk-releases";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 25.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CAB42CE72E9F637C0010429F /* AtomicSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAB42CE62E9F637C0010429F /* XCRemoteSwiftPackageReference "action-cards-swiftui-sdk-releases" */;
+			productName = AtomicSDK;
+		};
+		CAB42CE92E9F637C0010429F /* AtomicSwiftUISDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAB42CE62E9F637C0010429F /* XCRemoteSwiftPackageReference "action-cards-swiftui-sdk-releases" */;
+			productName = AtomicSwiftUISDK;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 1111111111111111111111111111111E /* Project object */;
+}

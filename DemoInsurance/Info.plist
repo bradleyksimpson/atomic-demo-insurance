@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleName</key>
+	<string>DemoInsurance</string>
+	<key>CFBundleDisplayName</key>
+	<string>DemoInsurance</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.demo.insurance</string>
+	<key>CFBundleVersion</key>
+	<string>1.01</string>
+	<key>CFBundleShortVersionString</key>
+	<string>1.01</string>
+	<key>UILaunchScreen</key>
+	<dict/>
+	<key>UISupportedInterfaceOrientations</key>
+	<array>
+		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
+	</array>
+	<key>NSCameraUsageDescription</key>
+	<string>This app uses camera to take photos for claims processing</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This app accesses photos for claims processing</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>This app uses location for telematics and driving insights</string>
+	<key>NSMotionUsageDescription</key>
+	<string>This app uses motion sensors to track driving behavior for insurance discounts</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+</dict>
+</plist>
