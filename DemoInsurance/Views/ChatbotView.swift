@@ -43,7 +43,7 @@ struct ChatbotView: View {
                         .padding()
                     }
                     .background(Theme.backgroundGray)
-                    .onChange(of: messages.count) { _ in
+                    .onChange(of: messages.count) { oldValue, newValue in
                         withAnimation {
                             if isTyping {
                                 proxy.scrollTo("typing", anchor: .bottom)

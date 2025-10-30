@@ -81,6 +81,7 @@ struct HomeView: View {
                                 )
                                 .shadow(color: Theme.cardShadow, radius: 10, x: 0, y: 5)
                             
+                            // Note: No fixed height - let SDK auto-size for content and collapse when empty
                             #if canImport(AtomicSwiftUISDK)
                             DemoInsuranceAtomicHorizontalScrollContainer(containerID: DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)
                                 .clipShape(RoundedRectangle(cornerRadius: 12))
@@ -89,7 +90,6 @@ struct HomeView: View {
                             InsuranceAtomicHorizontalPlaceholder(containerID: DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)
                             #endif
                         }
-                        .frame(height: 140)
                         .padding(.horizontal, 20)
                     }
                 }

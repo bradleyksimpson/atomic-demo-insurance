@@ -150,14 +150,48 @@ class DemoInsuranceAtomicIntegrationManager: ObservableObject {
     
     func configureHorizontalScrollContainer() -> UIView {
         print("↔️ Configuring Demo Insurance Horizontal Scroll Container: \(DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)")
-        
+
         let horizontalView = AACHorizontalContainerView(
             frame: .zero,
             containerIdentifier: DemoInsuranceAtomicConfiguration.horizontalScrollContainerID,
             configuration: DemoInsuranceAtomicConfiguration.sharedHorizontalConfig
         )
-        
+
         return horizontalView
+    }
+
+    // MARK: - Custom Event Methods
+
+    /// Sends a reset-insurance custom event to Atomic SDK
+    /// This follows the same pattern as Demo Uni (Otago Student App) and Demo Power
+    static func sendResetInsuranceEvent(completion: @escaping (Bool, String?) -> Void) {
+        #if canImport(AtomicSDK)
+        print("🔄 RESET INSURANCE EVENT TRIGGERED")
+        print("📡 Event name: reset-insurance")
+        print("📱 Source: demo-insurance-app")
+
+        let customEvent = AACCustomEvent(name: "reset-insurance", properties: [
+            "resetType": "longPress",
+            "timestamp": ISO8601DateFormatter().string(from: Date()),
+            "source": "demo-insurance-app",
+            "environmentId": DemoInsuranceAtomicConfiguration.environmentID
+        ])
+
+        AACSession.send(customEvent) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("❌ Failed to send reset-insurance event: \(error.localizedDescription)")
+                    completion(false, error.localizedDescription)
+                } else {
+                    print("✅ Successfully sent reset-insurance event to Atomic SDK")
+                    completion(true, nil)
+                }
+            }
+        }
+        #else
+        print("⚠️ AtomicSDK not available - reset-insurance event not sent")
+        completion(false, "AtomicSDK not available")
+        #endif
     }
 }
 

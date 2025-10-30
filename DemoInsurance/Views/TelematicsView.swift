@@ -26,7 +26,16 @@ struct TelematicsView: View {
                     
                     // Potential savings
                     savingsCard
-                    
+
+                    // Atomic Horizontal Scroll Container - Driving Tips & Insights
+                    #if canImport(AtomicSwiftUISDK)
+                    DemoInsuranceAtomicHorizontalScrollContainer(containerID: DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)
+                        .frame(maxWidth: .infinity)
+                    #else
+                    InsuranceAtomicHorizontalPlaceholder(containerID: DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)
+                        .frame(maxWidth: .infinity)
+                    #endif
+
                     // Enhanced Time range selector with better contrast
                     VStack(alignment: .leading, spacing: 12) {
                         Text("Time Period")

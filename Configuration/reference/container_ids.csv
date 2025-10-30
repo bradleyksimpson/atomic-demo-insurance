@@ -1,0 +1,8 @@
+Name,ID,Stream,Card limit,Tab,ContainerConfiguration,Location,Atomic Help Doc,Themes
+Overlay,5GdbeglB,Overlay,50,Schedule,Modal Container,Overlay exactly like the overlay in the Demo Education app,https://documentation.atomic.io/sdks/ios-swiftui#displaying-modal-container,Atomic - Light
+Toast,Zzeb10GQ,Toast,1,Schedule,SingleCardContainer,Toast exactly like the in the Demo Education app,https://documentation.atomic.io/sdks/ios-swiftui#displaying-a-single-card-container,Atomic - Light
+Embedded,5zg5kRmX,Embedded,50,Schedule,SingleCardContainer,Immediately below the events horizontal scrolling container,https://documentation.atomic.io/sdks/ios-swiftui#displaying-a-single-card-container,Atomic - Light
+Embedded-2,Rm0QZklj,Embedded-2,50,Map,SingleCardContainer,At bottom of scrolling container,https://documentation.atomic.io/sdks/ios-swiftui#displaying-a-single-card-container,Atomic - Light
+Embedded-3,1zyjOLGx,Embedded-3,50,Network,SingleCardContainer,Above search and below QR code,https://documentation.atomic.io/sdks/ios-swiftui#displaying-a-single-card-container,Atomic - Light
+Horizontal_Scroll,KzRRBDzJ,Horizontal_Scroll,50,More,HorizontalContainer,Below names and role and above event information,https://documentation.atomic.io/sdks/ios-swiftui#displaying-a-horizontal-container,Atomic - Light
+Message_Center,Wm2PoYzK,Message_Center,100,Messages,StreamContainer,Message Center exactly like the Demo Education app,https://documentation.atomic.io/sdks/ios-swiftui#displaying-a-vertical-container,Atomic - Light

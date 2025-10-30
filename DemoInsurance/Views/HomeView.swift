@@ -2,8 +2,12 @@ import SwiftUI
 
 struct HomeView: View {
     @EnvironmentObject var appState: AppState
-    @State private var greeting = "Good morning"
     @State private var selectedCategory: InsuranceType?
+    @State private var shieldPressed = false
+    @State private var shieldScale: CGFloat = 1.0
+    @State private var longPressProgress: CGFloat = 0.0
+    @State private var showSuccessFeedback = false
+    @State private var isLongPressing = false
     
     var body: some View {
         NavigationView {
@@ -17,81 +21,24 @@ struct HomeView: View {
                     
                     // Insurance Categories
                     categoriesSection
-                    
+
+                    // Atomic Single Card Container - Insurance Alerts
+                    #if canImport(AtomicSwiftUISDK)
+                    DemoInsuranceAtomicSingleCardContainer(containerID: DemoInsuranceAtomicConfiguration.embeddedContainerID)
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, -8)
+                    #else
+                    InsuranceAtomicPlaceholderCard(title: "Insurance Alerts", subtitle: "SDK Ready: \(DemoInsuranceAtomicConfiguration.embeddedContainerID)", icon: "🛡️")
+                        .frame(maxWidth: .infinity)
+                    #endif
+
                     // Active Policies Summary
                     if !appState.userPolicies.isEmpty {
                         activePoliciesSection
                     }
-                    
-                    // Atomic Single Card Container - Insurance Alerts
-                    ZStack {
-                        // Glass background to match design system
-                        RoundedRectangle(cornerRadius: 20)
-                            .fill(.ultraThinMaterial)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .fill(.white.opacity(0.6))
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 20)
-                                    .stroke(.white.opacity(0.5), lineWidth: 1)
-                            )
-                            .shadow(color: Theme.cardShadow, radius: 15, x: 0, y: 8)
-                        
-                        // Real Atomic Single Card Container
-                        #if canImport(AtomicSwiftUISDK)
-                        DemoInsuranceAtomicSingleCardContainer(containerID: DemoInsuranceAtomicConfiguration.embeddedContainerID)
-                            .clipShape(RoundedRectangle(cornerRadius: 16))
-                        #else
-                        InsuranceAtomicPlaceholderCard(title: "Insurance Alerts", subtitle: "SDK Ready: \(DemoInsuranceAtomicConfiguration.embeddedContainerID)", icon: "🛡️")
-                        #endif
-                    }
-                    .frame(height: 120)
-                    
+
                     // Recommendations
                     recommendationsSection
-                    
-                    // Atomic Horizontal Scroll Container - Insurance Tips
-                    VStack(alignment: .leading, spacing: 12) {
-                        HStack {
-                            Text("Insurance Tips & Benefits")
-                                .font(.system(size: 18, weight: .bold, design: .rounded))
-                                .foregroundColor(Theme.textPrimary)
-                            
-                            Spacer()
-                            
-                            Text("Container: \(DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)")
-                                .font(.system(size: 10, weight: .medium, design: .rounded))
-                                .foregroundColor(Theme.textSecondary)
-                        }
-                        .padding(.horizontal, 20)
-                        
-                        // Real Atomic Horizontal Scroll Container
-                        ZStack {
-                            // Glass background maintaining design consistency
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill(.ultraThinMaterial)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .fill(.white.opacity(0.5))
-                                )
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 16)
-                                        .stroke(.white.opacity(0.4), lineWidth: 1)
-                                )
-                                .shadow(color: Theme.cardShadow, radius: 10, x: 0, y: 5)
-                            
-                            #if canImport(AtomicSwiftUISDK)
-                            DemoInsuranceAtomicHorizontalScrollContainer(containerID: DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                                .padding(4)
-                            #else
-                            InsuranceAtomicHorizontalPlaceholder(containerID: DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)
-                            #endif
-                        }
-                        .frame(height: 140)
-                        .padding(.horizontal, 20)
-                    }
                 }
                 .padding(.horizontal)
                 .padding(.bottom, 100)
@@ -105,75 +52,126 @@ struct HomeView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(greeting)
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundColor(Theme.textSecondary)
-                    
-                    // Enhanced app name with icon and mixed typography
+                    // Enhanced app name with icon and mixed typography - Long press trigger area
                     HStack(spacing: 8) {
-                        // Insurance/Shield icon with glass effect
+                        // Insurance/Shield icon with glass effect + long press custom event
                         ZStack {
+                            // Progress ring during long press
+                            Circle()
+                                .stroke(Theme.primaryPink.opacity(0.2), lineWidth: 3)
+                                .frame(width: 42, height: 42)
+
+                            Circle()
+                                .trim(from: 0, to: longPressProgress)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [Theme.primaryPink, Theme.darkPink],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    style: StrokeStyle(lineWidth: 3, lineCap: .round)
+                                )
+                                .frame(width: 42, height: 42)
+                                .rotationEffect(.degrees(-90))
+                                .animation(.linear(duration: 0.1), value: longPressProgress)
+
                             Circle()
                                 .fill(.ultraThinMaterial)
                                 .frame(width: 36, height: 36)
                                 .overlay(
                                     Circle()
-                                        .stroke(Theme.primaryPink.opacity(0.3), lineWidth: 1.5)
+                                        .stroke((shieldPressed ? Theme.primaryPink : Theme.primaryPink.opacity(0.3)), lineWidth: 1.5)
                                 )
                                 .shadow(color: Theme.primaryPink.opacity(0.2), radius: 4, x: 0, y: 2)
-                            
-                            Image(systemName: "shield.checkered")
-                                .foregroundStyle(
-                                    LinearGradient(
-                                        colors: [Theme.primaryPink, Theme.darkPink],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
+
+                            // Success checkmark overlay
+                            if showSuccessFeedback {
+                                Image(systemName: "checkmark.circle.fill")
+                                    .foregroundStyle(
+                                        LinearGradient(
+                                            colors: [.green, .green.opacity(0.8)],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
                                     )
-                                )
-                                .font(.system(size: 18, weight: .medium))
+                                    .font(.system(size: 24, weight: .bold))
+                                    .transition(.scale.combined(with: .opacity))
+                            } else {
+                                Image(systemName: "shield.checkered")
+                                    .foregroundStyle(
+                                        LinearGradient(
+                                            colors: shieldPressed ? [Theme.darkPink, Theme.primaryPink] : [Theme.primaryPink, Theme.darkPink],
+                                            startPoint: .topLeading,
+                                            endPoint: .bottomTrailing
+                                        )
+                                    )
+                                    .font(.system(size: 18, weight: .medium))
+                            }
                         }
-                        
+                        .scaleEffect(shieldScale)
+                        .animation(.spring(duration: 0.3, bounce: 0.5), value: shieldScale)
+                        .animation(.easeInOut(duration: 0.3), value: shieldPressed)
+                        .animation(.spring(duration: 0.4, bounce: 0.6), value: showSuccessFeedback)
+
                         // Mixed typography app name
                         HStack(spacing: 0) {
                             Text("Demo")
                                 .font(.system(size: 28, weight: .regular, design: .rounded))
                                 .foregroundColor(Theme.textSecondary)
-                            
+
                             Text("Insurance")
                                 .font(.system(size: 28, weight: .bold, design: .rounded))
                                 .foregroundColor(Theme.textPrimary)
                         }
                     }
+                    .contentShape(Rectangle())
+                    .onLongPressGesture(minimumDuration: 2.0, pressing: { pressing in
+                        if pressing {
+                            // User started pressing
+                            handleLongPressStart()
+                        } else {
+                            // User lifted finger before completion
+                            if isLongPressing {
+                                cancelLongPress()
+                            }
+                        }
+                    }, perform: {
+                        // Long press completed successfully
+                        handleShieldLongPress()
+                    })
                 }
                 
                 Spacer()
-                
-                // Enhanced notification bell with glass effect
-                Button(action: {}) {
-                    ZStack(alignment: .topTrailing) {
-                        ZStack {
-                            Circle()
-                                .fill(.ultraThinMaterial)
-                                .frame(width: 44, height: 44)
-                                .overlay(
-                                    Circle()
-                                        .stroke(.white.opacity(0.5), lineWidth: 1)
-                                )
-                                .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
-                            
-                            Image(systemName: "bell.fill")
-                                .font(.system(size: 20, weight: .medium))
-                                .foregroundColor(Theme.textPrimary)
-                        }
-                        
+
+                // Profile avatar button
+                NavigationLink(destination: ProfileView()) {
+                    ZStack {
                         Circle()
-                            .fill(Theme.primaryPink)
-                            .frame(width: 12, height: 12)
-                            .offset(x: 6, y: -6)
+                            .fill(.ultraThinMaterial)
+                            .frame(width: 44, height: 44)
+                            .overlay(
+                                Circle()
+                                    .stroke(.white.opacity(0.5), lineWidth: 1)
+                            )
+                            .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+
+                        // Profile avatar
+                        Image(systemName: "person.crop.circle.fill")
+                            .font(.system(size: 26, weight: .medium))
+                            .foregroundStyle(
+                                LinearGradient(
+                                    colors: [Theme.primaryPink, Theme.darkPink],
+                                    startPoint: .topLeading,
+                                    endPoint: .bottomTrailing
+                                )
+                            )
                     }
                 }
             }
-            
+
+            Spacer()
+                .frame(height: 16) // Extra space before Protection Score
+
             // Protection Score Card
             HStack {
                 VStack(alignment: .leading) {
@@ -285,6 +283,128 @@ struct HomeView: View {
                 color: Theme.success
             )
         }
+    }
+
+    // MARK: - Custom Event Handlers
+
+    /// Handles long press start - begins progress animation and haptic feedback
+    private func handleLongPressStart() {
+        print("🔄 Long press started")
+        isLongPressing = true
+
+        // Initial haptic feedback - light impact when press begins
+        let lightFeedback = UIImpactFeedbackGenerator(style: .light)
+        lightFeedback.prepare()
+        lightFeedback.impactOccurred()
+
+        // Start visual feedback
+        withAnimation(.easeInOut(duration: 0.2)) {
+            shieldScale = 1.1
+            shieldPressed = true
+        }
+
+        // Animate progress ring over 2 seconds
+        withAnimation(.linear(duration: 2.0)) {
+            longPressProgress = 1.0
+        }
+
+        // Mid-press haptic feedback at 1 second
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            if self.isLongPressing {
+                let mediumFeedback = UIImpactFeedbackGenerator(style: .medium)
+                mediumFeedback.prepare()
+                mediumFeedback.impactOccurred()
+            }
+        }
+    }
+
+    /// Cancels long press if user drags away
+    private func cancelLongPress() {
+        print("❌ Long press cancelled")
+        isLongPressing = false
+
+        // Reset animations
+        withAnimation(.spring(duration: 0.3, bounce: 0.5)) {
+            longPressProgress = 0.0
+            shieldScale = 1.0
+            shieldPressed = false
+        }
+    }
+
+    /// Handles shield icon long press completion - sends custom event to Atomic SDK
+    /// Follows Demo Uni and Demo Power pattern with enhanced visual and haptic feedback
+    private func handleShieldLongPress() {
+        guard isLongPressing else { return }
+
+        print("🔄 Shield long press completed")
+        isLongPressing = false
+
+        // Completion haptic feedback - heavy impact for success
+        let heavyFeedback = UIImpactFeedbackGenerator(style: .heavy)
+        heavyFeedback.prepare()
+        heavyFeedback.impactOccurred()
+
+        // Visual feedback - completion pulse
+        withAnimation(.spring(duration: 0.3, bounce: 0.5)) {
+            shieldScale = 1.3
+        }
+
+        // Send custom event to Atomic SDK
+        #if canImport(AtomicSDK)
+        DemoInsuranceAtomicIntegrationManager.sendResetInsuranceEvent { success, error in
+            DispatchQueue.main.async {
+                if success {
+                    print("✅ Reset insurance event sent successfully")
+
+                    // Success haptic feedback
+                    let successFeedback = UINotificationFeedbackGenerator()
+                    successFeedback.prepare()
+                    successFeedback.notificationOccurred(.success)
+
+                    // Show success checkmark
+                    withAnimation(.spring(duration: 0.4, bounce: 0.6)) {
+                        self.showSuccessFeedback = true
+                        self.shieldScale = 1.2
+                    }
+
+                    // Hide success feedback and reset after delay
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                        withAnimation(.spring(duration: 0.3, bounce: 0.5)) {
+                            self.showSuccessFeedback = false
+                            self.shieldPressed = false
+                            self.shieldScale = 1.0
+                            self.longPressProgress = 0.0
+                        }
+                    }
+                } else {
+                    print("❌ Failed to send reset insurance event: \(error ?? "unknown error")")
+
+                    // Error haptic feedback
+                    let errorFeedback = UINotificationFeedbackGenerator()
+                    errorFeedback.prepare()
+                    errorFeedback.notificationOccurred(.error)
+
+                    // Reset with error state
+                    withAnimation(.spring(duration: 0.3, bounce: 0.5)) {
+                        self.shieldPressed = false
+                        self.shieldScale = 1.0
+                        self.longPressProgress = 0.0
+                    }
+                }
+            }
+        }
+        #else
+        print("⚠️ AtomicSDK not available - event not sent")
+
+        // Reset without SDK
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            withAnimation(.spring(duration: 0.3, bounce: 0.5)) {
+                self.shieldPressed = false
+                self.shieldScale = 1.0
+                self.longPressProgress = 0.0
+            }
+        }
+        #endif
     }
 }
 

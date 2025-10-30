@@ -25,7 +25,17 @@ struct ClaimsView: View {
                     
                     // Claims summary
                     claimsSummaryCards
-                    
+
+                    // Atomic Embedded-3 Container - Claims Insights
+                    #if canImport(AtomicSwiftUISDK)
+                    DemoInsuranceAtomicSingleCardContainer(containerID: DemoInsuranceAtomicConfiguration.embedded3ContainerID)
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, -8)
+                    #else
+                    InsuranceAtomicPlaceholderCard(title: "Claims Insights", subtitle: "SDK Ready: \(DemoInsuranceAtomicConfiguration.embedded3ContainerID)", icon: "📊")
+                        .frame(maxWidth: .infinity)
+                    #endif
+
                     // Active claims
                     if !activeClaims.isEmpty {
                         activeClaimsSection
@@ -70,7 +80,7 @@ struct ClaimsView: View {
                             InsuranceAtomicStreamPlaceholder(containerID: DemoInsuranceAtomicConfiguration.messageCenterContainerID)
                             #endif
                         }
-                        .frame(height: 260)
+                        .frame(maxWidth: .infinity)
                         .padding(.horizontal, 20)
                     }
                     
@@ -383,10 +393,10 @@ struct NewClaimView: View {
                 .padding(.top)
             }
         }
-        .onChange(of: selectedPhotos) { items in
+        .onChange(of: selectedPhotos) { oldValue, newValue in
             Task {
                 selectedImages = []
-                for item in items {
+                for item in newValue {
                     if let data = try? await item.loadTransferable(type: Data.self),
                        let image = UIImage(data: data) {
                         selectedImages.append(image)

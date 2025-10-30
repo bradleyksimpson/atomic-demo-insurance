@@ -63,7 +63,17 @@ struct PoliciesView: View {
                     
                     // Quick actions
                     quickActions
-                    
+
+                    // Atomic Embedded-2 Container - Policy Insights
+                    #if canImport(AtomicSwiftUISDK)
+                    DemoInsuranceAtomicSingleCardContainer(containerID: DemoInsuranceAtomicConfiguration.embedded2ContainerID)
+                        .frame(maxWidth: .infinity)
+                        .padding(.horizontal, -8)
+                    #else
+                    InsuranceAtomicPlaceholderCard(title: "Policy Insights", subtitle: "SDK Ready: \(DemoInsuranceAtomicConfiguration.embedded2ContainerID)", icon: "📋")
+                        .frame(maxWidth: .infinity)
+                    #endif
+
                     // Active policies
                     activePoliciesSection
                     
