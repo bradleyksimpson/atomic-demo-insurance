@@ -15,10 +15,10 @@ struct HomeView: View {
                 VStack(spacing: 24) {
                     // Header
                     headerSection
-                    
+
                     // Quick Actions
                     quickActionsSection
-                    
+
                     // Insurance Categories
                     categoriesSection
 
@@ -43,6 +43,8 @@ struct HomeView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 100)
             }
+            .scrollIndicators(.hidden)
+            .scrollDismissesKeyboard(.interactively)
             .background(Theme.backgroundGray)
             .navigationBarHidden(true)
         }

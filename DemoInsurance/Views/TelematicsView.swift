@@ -71,6 +71,8 @@ struct TelematicsView: View {
                 }
                 .padding(.bottom, 100)
             }
+            .scrollIndicators(.hidden)
+            .scrollDismissesKeyboard(.interactively)
             .background(Theme.backgroundGray)
             .navigationTitle("Drive & Save")
             .navigationBarTitleDisplayMode(.large)

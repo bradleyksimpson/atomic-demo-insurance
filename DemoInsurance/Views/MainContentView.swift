@@ -17,10 +17,12 @@ class AtomicViewModel: ObservableObject {
 
     private var toastObserverToken: NSObjectProtocol?
     private var messageObserverToken: NSObjectProtocol?
+    private var sdkEventObserver: NSObjectProtocol?
 
     init() {
         setupToastObserver()
         setupMessageObserver()
+        setupSDKEventObservers()
     }
 
     private func setupToastObserver() {
@@ -45,28 +47,53 @@ class AtomicViewModel: ObservableObject {
 
     private func setupMessageObserver() {
         #if canImport(AtomicSDK)
-        // Observe message center container for badge count (Otago pattern)
+        // Observe message center container for badge count with 10s interval
         messageObserverToken = AACSession.observeCardCountForStreamContainer(
             withIdentifier: DemoInsuranceAtomicConfiguration.messageCenterContainerID,
-            interval: 20
+            interval: 10
         ) { count in
             if let count = count {
                 DispatchQueue.main.async {
                     self.messageCount = Int(truncating: count)
-                    print("📬 Demo Insurance - Messages badge updated: \(self.messageCount) cards")
                 }
             }
         }
         #endif
     }
 
+    private func setupSDKEventObservers() {
+        #if canImport(AtomicSDK)
+        // Listen for card completion events for instant badge updates
+        sdkEventObserver = NotificationCenter.default.addObserver(
+            forName: Notification.Name("AACSessionsDidCompleteCardRequest"),
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            // Trigger immediate refresh - existing observers will handle updates
+            self?.refreshAllBadgeCounts()
+        }
+        #endif
+    }
+
+    private func refreshAllBadgeCounts() {
+        // Existing observers will handle the updates automatically
+        // This just triggers an immediate check without waiting for polling interval
+    }
+
     deinit {
+        #if canImport(AtomicSDK)
+        // CRITICAL: Use Atomic SDK cleanup method for Atomic observers
         if let token = toastObserverToken {
-            NotificationCenter.default.removeObserver(token)
+            AACSession.stopObservingCardCount(token)
         }
         if let token = messageObserverToken {
-            NotificationCenter.default.removeObserver(token)
+            AACSession.stopObservingCardCount(token)
         }
+        // NotificationCenter observer uses standard cleanup
+        if let observer = sdkEventObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        #endif
     }
 }
 
@@ -122,10 +149,8 @@ struct MainContentView: View {
             .accentColor(Theme.primaryPink)
         }
         .sheet(isPresented: $atomicViewModel.showToast) {
-            // Toast Container - Bottom sheet like Otago app
+            // Toast Container - Bottom sheet with dynamic height
             InsuranceToastSheetView(containerID: DemoInsuranceAtomicConfiguration.toastContainerID, brandColor: "#34C759")
-                .presentationDetents([.height(300)])
-                .presentationDragIndicator(.visible)
         }
         // CRITICAL: Add modal container for overlay cards (following Demo Power pattern)
         #if canImport(AtomicSwiftUISDK)
@@ -141,39 +166,42 @@ struct InsuranceToastSheetView: View {
     let brandColor: String
 
     var body: some View {
-        ZStack {
+        ZStack(alignment: .top) {
+            // Background color fills entire sheet
             Color(hex: brandColor)
-                .ignoresSafeArea(.all)
+                .ignoresSafeArea()
 
-            VStack(spacing: 0) {
-                Spacer().frame(height: 40) // 25 original + 15 requested
-
+            VStack {
                 #if canImport(AtomicSwiftUISDK)
                 SingleCardContainer(
                     containerId: containerID,
                     configuration: getToastConfig()
                 )
-                .frame(height: 240)
                 .cornerRadius(16)
                 .padding(.horizontal, 16)
                 #else
                 Text("Toast Container: \(containerID)")
                     .foregroundColor(.white)
-                    .frame(height: 240)
                     .frame(maxWidth: .infinity)
                     .background(Color.gray.opacity(0.3))
                     .cornerRadius(16)
                     .padding(.horizontal, 16)
                 #endif
 
-                Spacer()
+                // Spacer fills remaining space with background color
+                Spacer(minLength: 0)
             }
+            .padding(.top, 40)
         }
+        .modifier(ToastSheetModifier())
+        .presentationBackgroundCompat()
+        .presentationDragIndicator(.visible)
     }
 
     #if canImport(AtomicSwiftUISDK)
     private func getToastConfig() -> ContainerConfiguration {
         var config = ContainerConfiguration()
+        config.cardListRefreshInterval = 30  // 30s for toast notifications
         config.enabledUIElements = []
         config.setCustomValue("", for: .toastCardCompletedMessage)
         config.ignoresSafeAreaEdges = [.bottom]
@@ -185,47 +213,95 @@ struct InsuranceToastSheetView: View {
 // MARK: - Insurance Messages View
 struct InsuranceMessagesView: View {
     var body: some View {
-        VStack(spacing: 0) {
-            // Custom header - half height with title
+        // CRITICAL: NavigationStack wrapper enables subviews to display
+        NavigationStack {
             VStack(spacing: 0) {
-                Text("Messages")
-                    .font(.system(size: 28, weight: .bold, design: .rounded))
-                    .foregroundColor(Theme.textPrimary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                    .padding(.top, 16)
-                    .padding(.bottom, 12)
-            }
-            .background(Color.white)
-            .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 2)
+                // Custom header - half height with title
+                VStack(spacing: 0) {
+                    Text("Messages")
+                        .font(.system(size: 28, weight: .bold, design: .rounded))
+                        .foregroundColor(Theme.textPrimary)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 20)
+                        .padding(.top, 16)
+                        .padding(.bottom, 12)
+                }
+                .background(Color.white)
+                .shadow(color: .black.opacity(0.05), radius: 2, x: 0, y: 2)
 
-            // Messages container
-            #if canImport(AtomicSwiftUISDK)
-            StreamContainer(
-                containerId: DemoInsuranceAtomicConfiguration.messageCenterContainerID,
-                configuration: getMessageConfig()
-            )
-            #else
-            VStack {
-                Text("Messages Placeholder")
-                    .font(.title)
-                Text("Container: \(DemoInsuranceAtomicConfiguration.messageCenterContainerID)")
-                    .font(.caption)
-                    .foregroundColor(.secondary)
+                // Messages container
+                #if canImport(AtomicSwiftUISDK)
+                StreamContainer(
+                    containerId: DemoInsuranceAtomicConfiguration.messageCenterContainerID,
+                    configuration: getMessageConfig()
+                )
+                #else
+                VStack {
+                    Text("Messages Placeholder")
+                        .font(.title)
+                    Text("Container: \(DemoInsuranceAtomicConfiguration.messageCenterContainerID)")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                }
+                #endif
             }
-            #endif
+            .background(Theme.backgroundGray)
         }
-        .background(Theme.backgroundGray)
     }
 
     #if canImport(AtomicSwiftUISDK)
     private func getMessageConfig() -> ContainerConfiguration {
         var config = ContainerConfiguration()
+        config.cardListRefreshInterval = 30  // 30s for message stream
         config.enabledUIElements = []
         config.setCustomValue("", for: .toastCardCompletedMessage)
         return config
     }
     #endif
+}
+
+// MARK: - View Extensions
+
+extension View {
+    @ViewBuilder
+    func presentationBackgroundCompat() -> some View {
+        if #available(iOS 16.4, *) {
+            self.presentationBackground(Color(hex: "#34C759"))
+        } else {
+            self
+        }
+    }
+}
+
+// MARK: - Toast Sheet Modifier for Dynamic Height
+
+/// Dynamic sheet height modifier that automatically adjusts presentation detents
+/// to match the exact height of the content, eliminating awkward whitespace or cut-off content.
+///
+/// Based on atomic-explore reference implementation (FooterSheetModifier.swift)
+struct ToastSheetModifier: ViewModifier {
+    @State private var presentationDetents: Set<PresentationDetent> = [.medium]
+    @State private var selectedPresentationDetent: PresentationDetent = .medium
+
+    func body(content: Content) -> some View {
+        ScrollView {
+            content
+                .onGeometryChange(for: CGSize.self) { proxy in
+                    proxy.size
+                } action: { newValue in
+                    // Dynamically adjust sheet height to match content
+                    presentationDetents.insert(.height(newValue.height))
+                    selectedPresentationDetent = .height(newValue.height)
+                }
+        }
+        .scrollDisabled(true)
+        .background(Color.clear)
+        .frame(maxWidth: .infinity, alignment: .center)
+        .presentationDetents(
+            presentationDetents,
+            selection: $selectedPresentationDetent
+        )
+    }
 }
 
 // MARK: - Color Extension for Hex Support

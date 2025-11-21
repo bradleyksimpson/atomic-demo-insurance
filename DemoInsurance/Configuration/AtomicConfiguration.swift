@@ -86,17 +86,20 @@ class DemoInsuranceAtomicIntegrationManager: ObservableObject {
     }
     
     private func configureAtomicSDK() {
+        #if DEBUG
         print("🔧 Demo Insurance Atomic SDK Configuration")
         print("🏢 Organization ID: \(DemoInsuranceAtomicConfiguration.organizationID)")
         print("🌐 Environment ID: \(DemoInsuranceAtomicConfiguration.environmentID)")
         print("🌍 API Host: \(DemoInsuranceAtomicConfiguration.apiHost)")
-        
+        #endif
+
         validateContainerConfiguration()
     }
-    
+
     private func validateContainerConfiguration() {
+        #if DEBUG
         print("🔍 DEMO INSURANCE CONTAINER VALIDATION:")
-        
+
         let containers = [
             ("Overlay", DemoInsuranceAtomicConfiguration.overlayContainerID),
             ("Message Center", DemoInsuranceAtomicConfiguration.messageCenterContainerID),
@@ -107,12 +110,13 @@ class DemoInsuranceAtomicIntegrationManager: ObservableObject {
             ("Embedded", DemoInsuranceAtomicConfiguration.embeddedContainerID),
             ("Default", DemoInsuranceAtomicConfiguration.defaultContainerID)
         ]
-        
+
         for (name, id) in containers {
             let status = validateContainerID(id)
             let statusIcon = status ? "✅" : "❌"
             print("   \(statusIcon) \(name): '\(id)' (Length: \(id.count), Valid: \(status))")
         }
+        #endif
     }
     
     private func validateContainerID(_ containerID: String) -> Bool {
@@ -125,31 +129,37 @@ class DemoInsuranceAtomicIntegrationManager: ObservableObject {
     
     // MARK: - Container Configuration Methods
     func configureSingleCardContainer() -> UIView {
+        #if DEBUG
         print("🃏 Configuring Demo Insurance Single Card Container: \(DemoInsuranceAtomicConfiguration.embeddedContainerID)")
-        
+        #endif
+
         let singleCardView = AACSingleCardView(
             frame: .zero,
             containerIdentifier: DemoInsuranceAtomicConfiguration.embeddedContainerID,
             configuration: DemoInsuranceAtomicConfiguration.sharedSingleCardConfig
         )
-        
+
         return singleCardView
     }
-    
+
     func configureStreamContainer() -> UIView {
+        #if DEBUG
         print("📱 Configuring Demo Insurance Stream Container: \(DemoInsuranceAtomicConfiguration.messageCenterContainerID)")
-        
+        #endif
+
         let streamContainer = AACStreamContainerViewController(
             identifier: DemoInsuranceAtomicConfiguration.messageCenterContainerID,
             configuration: DemoInsuranceAtomicConfiguration.sharedStreamConfig
         )
-        
+
         _ = streamContainer.view
         return streamContainer.view
     }
-    
+
     func configureHorizontalScrollContainer() -> UIView {
+        #if DEBUG
         print("↔️ Configuring Demo Insurance Horizontal Scroll Container: \(DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)")
+        #endif
 
         let horizontalView = AACHorizontalContainerView(
             frame: .zero,
@@ -166,9 +176,11 @@ class DemoInsuranceAtomicIntegrationManager: ObservableObject {
     /// This follows the same pattern as Demo Uni (Otago Student App) and Demo Power
     static func sendResetInsuranceEvent(completion: @escaping (Bool, String?) -> Void) {
         #if canImport(AtomicSDK)
+        #if DEBUG
         print("🔄 RESET INSURANCE EVENT TRIGGERED")
         print("📡 Event name: reset-insurance")
         print("📱 Source: demo-insurance-app")
+        #endif
 
         let customEvent = AACCustomEvent(name: "reset-insurance", properties: [
             "resetType": "longPress",
@@ -180,16 +192,22 @@ class DemoInsuranceAtomicIntegrationManager: ObservableObject {
         AACSession.send(customEvent) { error in
             DispatchQueue.main.async {
                 if let error = error {
+                    #if DEBUG
                     print("❌ Failed to send reset-insurance event: \(error.localizedDescription)")
+                    #endif
                     completion(false, error.localizedDescription)
                 } else {
+                    #if DEBUG
                     print("✅ Successfully sent reset-insurance event to Atomic SDK")
+                    #endif
                     completion(true, nil)
                 }
             }
         }
         #else
+        #if DEBUG
         print("⚠️ AtomicSDK not available - reset-insurance event not sent")
+        #endif
         completion(false, "AtomicSDK not available")
         #endif
     }
@@ -198,20 +216,22 @@ class DemoInsuranceAtomicIntegrationManager: ObservableObject {
 // MARK: - SwiftUI Integration Wrappers for Demo Insurance
 struct DemoInsuranceAtomicSingleCardContainer: UIViewRepresentable {
     let containerID: String
-    
+
     func makeUIView(context: Context) -> UIView {
+        #if DEBUG
         print("🔄 Creating Demo Insurance SingleCardContainer")
         print("🎯 Container ID: \(containerID)")
-        
+        #endif
+
         let singleCardView = AACSingleCardView(
             frame: .zero,
             containerIdentifier: containerID,
             configuration: DemoInsuranceAtomicConfiguration.sharedSingleCardConfig
         )
-        
+
         singleCardView.accessibilityIdentifier = "demo-insurance-single-card"
         singleCardView.accessibilityLabel = "Insurance Alert Card"
-        
+
         return singleCardView
     }
     
@@ -222,16 +242,18 @@ struct DemoInsuranceAtomicSingleCardContainer: UIViewRepresentable {
 
 struct DemoInsuranceAtomicStreamContainer: UIViewControllerRepresentable {
     let containerID: String
-    
+
     func makeUIViewController(context: Context) -> AACStreamContainerViewController {
+        #if DEBUG
         print("🔄 Creating Demo Insurance StreamContainer")
         print("🎯 Container ID: \(containerID)")
-        
+        #endif
+
         let streamContainer = AACStreamContainerViewController(
             identifier: containerID,
             configuration: DemoInsuranceAtomicConfiguration.sharedStreamConfig
         )
-        
+
         return streamContainer
     }
     
@@ -242,20 +264,22 @@ struct DemoInsuranceAtomicStreamContainer: UIViewControllerRepresentable {
 
 struct DemoInsuranceAtomicHorizontalScrollContainer: UIViewRepresentable {
     let containerID: String
-    
+
     func makeUIView(context: Context) -> UIView {
+        #if DEBUG
         print("🔄 Creating Demo Insurance HorizontalContainer")
         print("🎯 Container ID: \(containerID)")
-        
+        #endif
+
         let horizontalView = AACHorizontalContainerView(
             frame: .zero,
             containerIdentifier: containerID,
             configuration: DemoInsuranceAtomicConfiguration.sharedHorizontalConfig
         )
-        
+
         horizontalView.accessibilityIdentifier = "demo-insurance-horizontal-scroll"
         horizontalView.accessibilityLabel = "Insurance Content"
-        
+
         return horizontalView
     }
     

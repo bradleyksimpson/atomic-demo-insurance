@@ -27,6 +27,8 @@ struct ProfileView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 100)
             }
+            .scrollIndicators(.hidden)
+            .scrollDismissesKeyboard(.interactively)
             .background(Theme.backgroundGray)
             .navigationTitle("Profile")
             .navigationBarTitleDisplayMode(.large)

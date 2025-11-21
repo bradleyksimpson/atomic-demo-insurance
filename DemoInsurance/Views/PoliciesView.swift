@@ -83,6 +83,8 @@ struct PoliciesView: View {
                 .padding(.horizontal)
                 .padding(.bottom, 100)
             }
+            .scrollIndicators(.hidden)
+            .scrollDismissesKeyboard(.interactively)
             .background(Theme.backgroundGray)
             .navigationTitle("My Policies")
             .navigationBarTitleDisplayMode(.large)
@@ -496,6 +498,8 @@ struct PolicyDetailView: View {
                 }
                 .padding()
             }
+            .scrollIndicators(.hidden)
+            .scrollDismissesKeyboard(.interactively)
             .navigationTitle("Policy Details")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
