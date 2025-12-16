@@ -65,10 +65,10 @@ struct PoliciesView: View {
                     quickActions
 
                     // Atomic Embedded-2 Container - Policy Insights
+                    // Uses consistent alignment with surrounding content (following Demo Power pattern)
                     #if canImport(AtomicSwiftUISDK)
                     DemoInsuranceAtomicSingleCardContainer(containerID: DemoInsuranceAtomicConfiguration.embedded2ContainerID)
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, -8)
+                        .insuranceContainerAlignment()
                     #else
                     InsuranceAtomicPlaceholderCard(title: "Policy Insights", subtitle: "SDK Ready: \(DemoInsuranceAtomicConfiguration.embedded2ContainerID)", icon: "📋")
                         .frame(maxWidth: .infinity)

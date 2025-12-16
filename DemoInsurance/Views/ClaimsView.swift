@@ -27,10 +27,10 @@ struct ClaimsView: View {
                     claimsSummaryCards
 
                     // Atomic Embedded-3 Container - Claims Insights
+                    // Uses consistent alignment with surrounding content (following Demo Power pattern)
                     #if canImport(AtomicSwiftUISDK)
                     DemoInsuranceAtomicSingleCardContainer(containerID: DemoInsuranceAtomicConfiguration.embedded3ContainerID)
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, -8)
+                        .insuranceContainerAlignment()
                     #else
                     InsuranceAtomicPlaceholderCard(title: "Claims Insights", subtitle: "SDK Ready: \(DemoInsuranceAtomicConfiguration.embedded3ContainerID)", icon: "📊")
                         .frame(maxWidth: .infinity)

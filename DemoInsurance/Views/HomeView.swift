@@ -23,10 +23,10 @@ struct HomeView: View {
                     categoriesSection
 
                     // Atomic Single Card Container - Insurance Alerts
+                    // Uses consistent alignment with surrounding content (following Demo Power pattern)
                     #if canImport(AtomicSwiftUISDK)
                     DemoInsuranceAtomicSingleCardContainer(containerID: DemoInsuranceAtomicConfiguration.embeddedContainerID)
-                        .frame(maxWidth: .infinity)
-                        .padding(.horizontal, -8)
+                        .insuranceContainerAlignment()
                     #else
                     InsuranceAtomicPlaceholderCard(title: "Insurance Alerts", subtitle: "SDK Ready: \(DemoInsuranceAtomicConfiguration.embeddedContainerID)", icon: "🛡️")
                         .frame(maxWidth: .infinity)

@@ -28,12 +28,13 @@ struct TelematicsView: View {
                     savingsCard
 
                     // Atomic Horizontal Scroll Container - Driving Tips & Insights
+                    // Uses consistent alignment with surrounding content (following Demo Power pattern)
                     #if canImport(AtomicSwiftUISDK)
                     DemoInsuranceAtomicHorizontalScrollContainer(containerID: DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)
-                        .frame(maxWidth: .infinity)
+                        .insuranceContainerAlignment()
                     #else
                     InsuranceAtomicHorizontalPlaceholder(containerID: DemoInsuranceAtomicConfiguration.horizontalScrollContainerID)
-                        .frame(maxWidth: .infinity)
+                        .insuranceContainerAlignment()
                     #endif
 
                     // Enhanced Time range selector with better contrast
