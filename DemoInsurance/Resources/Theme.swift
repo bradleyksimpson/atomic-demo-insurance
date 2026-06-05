@@ -1,10 +1,10 @@
 import SwiftUI
 
 struct Theme {
-    // MARK: - Primary Brand Colors (Lemonade-inspired)
-    static let primaryPink = Color(red: 255/255, green: 0/255, blue: 131/255) // #FF0083
-    static let darkPink = Color(red: 204/255, green: 0/255, blue: 105/255)    // #CC0069
-    static let lightPink = Color(red: 255/255, green: 240/255, blue: 245/255) // #FFF0F5
+    // MARK: - Primary Brand Colors
+    static let primaryPink = Color(red: 174/255, green: 19/255, blue: 255/255) // #AE13FF
+    static let darkPink = Color(red: 120/255, green: 0/255, blue: 204/255)     // #7800CC
+    static let lightPink = Color(red: 245/255, green: 230/255, blue: 255/255)  // #F5E6FF
 
     // MARK: - Neutral Colors
     static let backgroundGray = Color(red: 248/255, green: 248/255, blue: 250/255) // #F8F8FA
