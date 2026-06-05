@@ -10,11 +10,13 @@ struct HomeView: View {
     @State private var isLongPressing = false
     
     var body: some View {
-        NavigationView {
+        let purple = Color(red: 174/255, green: 19/255, blue: 1)
+        return NavigationView {
             ScrollView {
                 VStack(spacing: 24) {
-                    // Header
-                    headerSection
+                    // Protection Score Card (first item in scroll content)
+                    protectionScoreCard
+                        .padding(.top, 8)
 
                     // Quick Actions
                     quickActionsSection
@@ -47,161 +49,150 @@ struct HomeView: View {
             .scrollDismissesKeyboard(.interactively)
             .background(Theme.backgroundGray)
             .navigationBarHidden(true)
+            .safeAreaInset(edge: .top, spacing: 0) {
+                stickyHeader(purple: purple)
+            }
         }
     }
-    
-    var headerSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            HStack {
-                VStack(alignment: .leading, spacing: 4) {
-                    // Enhanced app name with icon and mixed typography - Long press trigger area
-                    HStack(spacing: 8) {
-                        // Insurance/Shield icon with glass effect + long press custom event
-                        ZStack {
-                            // Progress ring during long press
-                            Circle()
-                                .stroke(Theme.primaryPink.opacity(0.2), lineWidth: 3)
-                                .frame(width: 42, height: 42)
 
-                            Circle()
-                                .trim(from: 0, to: longPressProgress)
-                                .stroke(
-                                    LinearGradient(
-                                        colors: [Theme.primaryPink, Theme.darkPink],
-                                        startPoint: .topLeading,
-                                        endPoint: .bottomTrailing
-                                    ),
-                                    style: StrokeStyle(lineWidth: 3, lineCap: .round)
-                                )
-                                .frame(width: 42, height: 42)
-                                .rotationEffect(.degrees(-90))
-                                .animation(.linear(duration: 0.1), value: longPressProgress)
-
-                            Circle()
-                                .fill(.ultraThinMaterial)
-                                .frame(width: 36, height: 36)
-                                .overlay(
-                                    Circle()
-                                        .stroke((shieldPressed ? Theme.primaryPink : Theme.primaryPink.opacity(0.3)), lineWidth: 1.5)
-                                )
-                                .shadow(color: Theme.primaryPink.opacity(0.2), radius: 4, x: 0, y: 2)
-
-                            // Success checkmark overlay
-                            if showSuccessFeedback {
-                                Image(systemName: "checkmark.circle.fill")
-                                    .foregroundStyle(
-                                        LinearGradient(
-                                            colors: [.green, .green.opacity(0.8)],
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                                    .font(.system(size: 24, weight: .bold))
-                                    .transition(.scale.combined(with: .opacity))
-                            } else {
-                                Image(systemName: "shield.checkered")
-                                    .foregroundStyle(
-                                        LinearGradient(
-                                            colors: shieldPressed ? [Theme.darkPink, Theme.primaryPink] : [Theme.primaryPink, Theme.darkPink],
-                                            startPoint: .topLeading,
-                                            endPoint: .bottomTrailing
-                                        )
-                                    )
-                                    .font(.system(size: 18, weight: .medium))
-                            }
-                        }
-                        .scaleEffect(shieldScale)
-                        .animation(.spring(duration: 0.3, bounce: 0.5), value: shieldScale)
-                        .animation(.easeInOut(duration: 0.3), value: shieldPressed)
-                        .animation(.spring(duration: 0.4, bounce: 0.6), value: showSuccessFeedback)
-
-                        // Mixed typography app name
-                        HStack(spacing: 0) {
-                            Text("Demo")
-                                .font(.system(size: 28, weight: .regular, design: .rounded))
-                                .foregroundColor(Theme.textSecondary)
-
-                            Text("Insurance")
-                                .font(.system(size: 28, weight: .bold, design: .rounded))
-                                .foregroundColor(Theme.textPrimary)
-                        }
-                    }
-                    .contentShape(Rectangle())
-                    .onLongPressGesture(minimumDuration: 2.0, pressing: { pressing in
-                        if pressing {
-                            // User started pressing
-                            handleLongPressStart()
-                        } else {
-                            // User lifted finger before completion
-                            if isLongPressing {
-                                cancelLongPress()
-                            }
-                        }
-                    }, perform: {
-                        // Long press completed successfully
-                        handleShieldLongPress()
-                    })
-                }
-                
-                Spacer()
-
-                // Profile avatar button
-                NavigationLink(destination: ProfileView()) {
+    private func stickyHeader(purple: Color) -> some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                // Enhanced app name with icon and mixed typography - Long press trigger area
+                HStack(spacing: 8) {
+                    // Insurance/Shield icon with glass effect + long press custom event
                     ZStack {
+                        // Progress ring during long press
                         Circle()
-                            .fill(.ultraThinMaterial)
-                            .frame(width: 44, height: 44)
-                            .overlay(
-                                Circle()
-                                    .stroke(.white.opacity(0.5), lineWidth: 1)
-                            )
-                            .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                            .stroke(Color.white.opacity(0.3), lineWidth: 3)
+                            .frame(width: 42, height: 42)
 
-                        // Profile avatar
-                        Image(systemName: "person.crop.circle.fill")
-                            .font(.system(size: 26, weight: .medium))
-                            .foregroundStyle(
+                        Circle()
+                            .trim(from: 0, to: longPressProgress)
+                            .stroke(
                                 LinearGradient(
-                                    colors: [Theme.primaryPink, Theme.darkPink],
+                                    colors: [Color.white, Color.white.opacity(0.7)],
                                     startPoint: .topLeading,
                                     endPoint: .bottomTrailing
-                                )
+                                ),
+                                style: StrokeStyle(lineWidth: 3, lineCap: .round)
                             )
+                            .frame(width: 42, height: 42)
+                            .rotationEffect(.degrees(-90))
+                            .animation(.linear(duration: 0.1), value: longPressProgress)
+
+                        Circle()
+                            .fill(Color.white.opacity(0.15))
+                            .frame(width: 36, height: 36)
+                            .overlay(
+                                Circle()
+                                    .stroke(shieldPressed ? Color.white : Color.white.opacity(0.5), lineWidth: 1.5)
+                            )
+                            .shadow(color: Color.black.opacity(0.15), radius: 4, x: 0, y: 2)
+
+                        // Success checkmark overlay
+                        if showSuccessFeedback {
+                            Image(systemName: "checkmark.circle.fill")
+                                .foregroundStyle(
+                                    LinearGradient(
+                                        colors: [.green, .green.opacity(0.8)],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    )
+                                )
+                                .font(.system(size: 24, weight: .bold))
+                                .transition(.scale.combined(with: .opacity))
+                        } else {
+                            Image(systemName: "shield.checkered")
+                                .foregroundColor(.white)
+                                .font(.system(size: 18, weight: .medium))
+                        }
                     }
+                    .scaleEffect(shieldScale)
+                    .animation(.spring(duration: 0.3, bounce: 0.5), value: shieldScale)
+                    .animation(.easeInOut(duration: 0.3), value: shieldPressed)
+                    .animation(.spring(duration: 0.4, bounce: 0.6), value: showSuccessFeedback)
+
+                    // Mixed typography app name
+                    HStack(spacing: 0) {
+                        Text("Demo")
+                            .font(.system(size: 28, weight: .regular, design: .rounded))
+                            .foregroundColor(.white)
+
+                        Text("Insurance")
+                            .font(.system(size: 28, weight: .bold, design: .rounded))
+                            .foregroundColor(.white)
+                    }
+                }
+                .contentShape(Rectangle())
+                .onLongPressGesture(minimumDuration: 2.0, pressing: { pressing in
+                    if pressing {
+                        // User started pressing
+                        handleLongPressStart()
+                    } else {
+                        // User lifted finger before completion
+                        if isLongPressing {
+                            cancelLongPress()
+                        }
+                    }
+                }, perform: {
+                    // Long press completed successfully
+                    handleShieldLongPress()
+                })
+            }
+
+            Spacer()
+
+            // Profile avatar button
+            NavigationLink(destination: ProfileView()) {
+                ZStack {
+                    Circle()
+                        .fill(Color.white.opacity(0.2))
+                        .frame(width: 44, height: 44)
+                        .overlay(
+                            Circle()
+                                .stroke(Color.white.opacity(0.5), lineWidth: 1)
+                        )
+                        .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+
+                    // Profile avatar
+                    Image(systemName: "person.crop.circle.fill")
+                        .font(.system(size: 26, weight: .medium))
+                        .foregroundColor(.white)
+                }
+            }
+        }
+        .padding(.horizontal)
+        .padding(.bottom, 16)
+        .background(purple.ignoresSafeArea(edges: .top))
+    }
+
+    var protectionScoreCard: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Your Protection Score")
+                    .font(.system(size: 14))
+                    .foregroundColor(.white.opacity(0.8))
+
+                HStack(alignment: .bottom) {
+                    Text("85")
+                        .font(.system(size: 40, weight: .bold))
+                        .foregroundColor(.white)
+                    Text("/100")
+                        .font(.system(size: 20))
+                        .foregroundColor(.white.opacity(0.8))
                 }
             }
 
             Spacer()
-                .frame(height: 16) // Extra space before Protection Score
 
-            // Protection Score Card
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Your Protection Score")
-                        .font(.system(size: 14))
-                        .foregroundColor(.white.opacity(0.8))
-                    
-                    HStack(alignment: .bottom) {
-                        Text("85")
-                            .font(.system(size: 40, weight: .bold))
-                            .foregroundColor(.white)
-                        Text("/100")
-                            .font(.system(size: 20))
-                            .foregroundColor(.white.opacity(0.8))
-                    }
-                }
-                
-                Spacer()
-                
-                Image(systemName: "shield.checkered")
-                    .font(.system(size: 50))
-                    .foregroundColor(.white.opacity(0.5))
-            }
-            .padding()
-            .background(Theme.primaryGradient)
-            .cornerRadius(20)
+            Image(systemName: "shield.checkered")
+                .font(.system(size: 50))
+                .foregroundColor(.white.opacity(0.5))
         }
-        .padding(.top)
+        .padding()
+        .background(Theme.primaryGradient)
+        .cornerRadius(20)
     }
     
     var quickActionsSection: some View {
