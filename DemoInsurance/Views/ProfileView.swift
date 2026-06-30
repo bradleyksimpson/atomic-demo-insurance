@@ -4,6 +4,7 @@ struct ProfileView: View {
     @EnvironmentObject var appState: AppState
     @State private var showSettings = false
     @State private var showNotificationSettings = false
+    @State private var showMessageHistory = false
     
     var body: some View {
         NavigationView {
@@ -34,6 +35,9 @@ struct ProfileView: View {
             .navigationBarTitleDisplayMode(.large)
             .sheet(isPresented: $showSettings) {
                 SettingsView()
+            }
+            .sheet(isPresented: $showMessageHistory) {
+                MessageHistoryView()
             }
         }
     }
@@ -196,6 +200,14 @@ struct ProfileView: View {
     
     var accountActionsSection: some View {
         VStack(spacing: 12) {
+            AccountActionRow(
+                icon: "clock.arrow.circlepath",
+                title: "Message History",
+                color: Theme.primaryPink
+            ) {
+                showMessageHistory = true
+            }
+
             AccountActionRow(
                 icon: "doc.text.fill",
                 title: "Policy Documents",
@@ -394,9 +406,33 @@ struct AccountActionRow: View {
     }
 }
 
+struct MessageHistoryView: View {
+    @Environment(\.dismiss) var dismiss
+
+    private let historyContainerID = DemoInsuranceAtomicConfiguration.historyContainerID
+
+    var body: some View {
+        NavigationView {
+            DemoInsuranceAtomicStreamContainer(containerID: historyContainerID)
+                .ignoresSafeArea(edges: .bottom)
+                .background(Theme.backgroundGray)
+                .navigationTitle("Message History")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Done") {
+                            dismiss()
+                        }
+                        .foregroundColor(Theme.primaryPink)
+                    }
+                }
+        }
+    }
+}
+
 struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
-    
+
     var body: some View {
         NavigationView {
             List {

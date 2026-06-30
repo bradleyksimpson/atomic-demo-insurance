@@ -36,6 +36,9 @@ struct DemoInsuranceAtomicConfiguration {
     static let embedded2ContainerID = "Rm0QZklj"        // Embedded-2Active for secondary content  
     static let embeddedContainerID = "5zg5kRmX"         // EmbeddedActive for main dashboard
     static let defaultContainerID = "nloaReG0"          // DefaultActive container
+    // TODO: Create a dedicated "History" stream container in the Workbench and paste its
+    // 8-character ID here. Until then the Message History screen (Profile) shows no cards.
+    static let historyContainerID = "TODOHIST"          // History — stream (Profile → Message History)
     
     // Demo Insurance branding configuration
     static let brandColors = AtomicBrandColors(
@@ -108,7 +111,8 @@ class DemoInsuranceAtomicIntegrationManager: ObservableObject {
             ("Embedded-3", DemoInsuranceAtomicConfiguration.embedded3ContainerID),
             ("Embedded-2", DemoInsuranceAtomicConfiguration.embedded2ContainerID),
             ("Embedded", DemoInsuranceAtomicConfiguration.embeddedContainerID),
-            ("Default", DemoInsuranceAtomicConfiguration.defaultContainerID)
+            ("Default", DemoInsuranceAtomicConfiguration.defaultContainerID),
+            ("History", DemoInsuranceAtomicConfiguration.historyContainerID)
         ]
 
         for (name, id) in containers {
