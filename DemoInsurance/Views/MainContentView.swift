@@ -28,7 +28,7 @@ class AtomicViewModel: ObservableObject {
     private func setupToastObserver() {
         #if canImport(AtomicSDK)
         // Observe toast container card count (Otago pattern)
-        toastObserverToken = AACSession.observeCardCountForStreamContainer(
+        toastObserverToken = AtomicSwiftUISDK.AACSession.observeCardCountForStreamContainer(
             withIdentifier: DemoInsuranceAtomicConfiguration.toastContainerID,
             interval: 30
         ) { count in
@@ -48,7 +48,7 @@ class AtomicViewModel: ObservableObject {
     private func setupMessageObserver() {
         #if canImport(AtomicSDK)
         // Observe message center container for badge count with 10s interval
-        messageObserverToken = AACSession.observeCardCountForStreamContainer(
+        messageObserverToken = AtomicSwiftUISDK.AACSession.observeCardCountForStreamContainer(
             withIdentifier: DemoInsuranceAtomicConfiguration.messageCenterContainerID,
             interval: 10
         ) { count in
@@ -84,10 +84,10 @@ class AtomicViewModel: ObservableObject {
         #if canImport(AtomicSDK)
         // CRITICAL: Use Atomic SDK cleanup method for Atomic observers
         if let token = toastObserverToken {
-            AACSession.stopObservingCardCount(token)
+            AtomicSwiftUISDK.AACSession.stopObservingCardCount(token)
         }
         if let token = messageObserverToken {
-            AACSession.stopObservingCardCount(token)
+            AtomicSwiftUISDK.AACSession.stopObservingCardCount(token)
         }
         // NotificationCenter observer uses standard cleanup
         if let observer = sdkEventObserver {

@@ -2,11 +2,11 @@ import Foundation
 import UIKit
 
 // Conditional imports - only when SDK is actually added
-#if canImport(AtomicSDK)
-import AtomicSDK
+#if canImport(AtomicSwiftUISDK)
+import AtomicSwiftUISDK
 
 // MARK: - Demo Insurance Atomic Session Delegate
-class DemoInsuranceAtomicSessionDelegate: NSObject, AACSessionDelegate {
+class DemoInsuranceAtomicSessionDelegate: NSObject, AtomicSwiftUISDK.AACSessionDelegate {
     func cardSessionDidRequestAuthenticationToken(handler: @escaping AACSessionAuthenticationTokenHandler) {
         let startTime = CFAbsoluteTimeGetCurrent()
         NSLog("🔐 Demo Insurance: AUTHENTICATION REQUEST RECEIVED at \(Date())")

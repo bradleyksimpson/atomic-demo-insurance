@@ -475,7 +475,7 @@
 			repositoryURL = "https://github.com/atomic-app/action-cards-swiftui-sdk-releases";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 25.3.0;
+				minimumVersion = 26.2.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

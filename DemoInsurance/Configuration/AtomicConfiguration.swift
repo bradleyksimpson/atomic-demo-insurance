@@ -186,14 +186,14 @@ class DemoInsuranceAtomicIntegrationManager: ObservableObject {
         print("📱 Source: demo-insurance-app")
         #endif
 
-        let customEvent = AACCustomEvent(name: "reset-insurance", properties: [
+        let customEvent = AtomicSwiftUISDK.AACCustomEvent(name: "reset-insurance", properties: [
             "resetType": "longPress",
             "timestamp": ISO8601DateFormatter().string(from: Date()),
             "source": "demo-insurance-app",
             "environmentId": DemoInsuranceAtomicConfiguration.environmentID
         ])
 
-        AACSession.send(customEvent) { error in
+        AtomicSwiftUISDK.AACSession.send(customEvent) { error in
             DispatchQueue.main.async {
                 if let error = error {
                     #if DEBUG

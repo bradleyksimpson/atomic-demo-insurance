@@ -30,13 +30,13 @@ struct DemoInsuranceApp: App {
 
         #if canImport(AtomicSDK)
         // Enable debug mode for detailed logging
-        AACSession.enableDebugMode(2)
+        AtomicSwiftUISDK.AACSession.enableDebugMode(2)
         print("🐛 Demo Insurance: Debug mode enabled (level 2)")
 
         // Real Atomic SDK initialization when SDK is available
         // Using login() method - matches working Demo Power pattern
         let atomicDelegate = DemoInsuranceAtomicSessionDelegate()
-        AACSession.login(
+        AtomicSwiftUISDK.AACSession.login(
             withEnvironmentId: DemoInsuranceAtomicConfiguration.environmentID,
             apiKey: DemoInsuranceAtomicConfiguration.jwtAPIKey,
             sessionDelegate: atomicDelegate,
